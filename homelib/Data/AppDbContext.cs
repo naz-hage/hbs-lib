@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using homelib.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-namespace homelib
+namespace homelib.Data
 {
     public class AppDbContext : DbContext
     {
@@ -10,7 +12,7 @@ namespace homelib
             : base(options)
         {
         }
-        
+
         // Parameterless constructor for Moq testing
         protected AppDbContext()
         {
@@ -18,7 +20,14 @@ namespace homelib
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=app.db");
+            if (Environment.GetEnvironmentVariable("USE_IN_MEMORY_DATABASE") == "True")
+            {
+                optionsBuilder.UseInMemoryDatabase("TestDatabase");
+            }
+            else if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlite(@"Data Source=C:\sqlite\data.db");
+            }
         }
     }
 }

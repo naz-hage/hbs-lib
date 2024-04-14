@@ -1,20 +1,16 @@
-﻿using homelib;
+﻿using homelib.Data;
+using homelib.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace homelibTests
+namespace homelibTests.Data
 {
 
     [TestClass]
     public class InMemoryRecordRepositotyTests
     {
-        private DbContextOptions<AppDbContext> _options;
+        private DbContextOptions<AppDbContext>? _options;
 
         [TestInitialize]
         public void TestInitialize()
@@ -33,16 +29,15 @@ namespace homelibTests
                 .Options;
 
             // Ensure the database is created.
-            using (var context = new AppDbContext(_options))
-            {
-                context.Database.EnsureCreated();
-            }
+            using var context = new AppDbContext(_options);
+            context.Database.EnsureCreated();
         }
 
         [TestMethod]
         public async Task GetAllRecordsAsync_ReturnsAllRecords()
         {
             // Arrange
+            Assert.IsNotNull(_options);
             using (var context = new AppDbContext(_options))
             {
                 context.Records.Add(new Record { Name = "The Name", Value = "The Value" });

@@ -1,17 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using homelib.Entities;
+using homelib.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace homelib
+namespace homelib.Data
 {
-    public class RecordRepository
+    public class RecordRepository(AppDbContext context) : IRecordRepository
     {
-        private readonly AppDbContext _context;
-
-        public RecordRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task<List<Record>> GetAllRecordsAsync()
         {

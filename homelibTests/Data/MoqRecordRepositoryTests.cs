@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using homelib;
 using homelibTests;
 using Moq.EntityFrameworkCore;
+using homelib.Entities;
+using homelib.Data;
 
-namespace homelib.Tests
+namespace homelibTests.Data
 {
     [TestClass]
     public class MoqRecordRepositoryTests
     {
-        private List<Record> GetTestRecords()
+        private static List<Record> GetTestRecords()
         {
             return new List<Record>
             {
