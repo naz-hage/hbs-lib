@@ -6,7 +6,7 @@ using Moq;
 namespace homelib.Services.Tests
 {
     [TestClass]
-    public class MoqRecordServiceTests : RecordServiceTestsBase
+    public class MoqRecordServiceTests
     {
         private Mock<IRecordRepository>? _mockRecordRepository;
         private RecordService? _recordService;
@@ -40,6 +40,7 @@ namespace homelib.Services.Tests
         public async Task AddRecordAsync_AddsRecord()
         {
             // Arrange
+            Assert.IsNotNull(_recordService);
             await ArrangeForEmptyDatabase();
 
             var record = new Record { Name = "The Name", Value = "The Value" };

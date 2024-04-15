@@ -8,7 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace homelibTests.Services
 {
     [TestClass]
-    public class RecordServiceTests : RecordServiceTestsBase
+    public class RecordServiceTests
     {
         private RecordService? _recordService;
         private AppDbContext? _context;
