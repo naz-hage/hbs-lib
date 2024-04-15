@@ -1,14 +1,13 @@
 ﻿using homelib.Data;
 using homelib.Entities;
 using homelib.Services;
-using homelib.Services.Tests;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace homelibTests.Services
 {
     [TestClass]
-    public class RecordServiceTests
+    public class InMemoryRecordServiceTests
     {
         private RecordService? _recordService;
         private AppDbContext? _context;

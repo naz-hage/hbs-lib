@@ -17,10 +17,11 @@ namespace homelibTests
             Console.WriteLine($"AssemblyInitialize: {context}");
             // Set up the test environment HBS_HOMELIB_DATABASE_TYPE =IN_MEMORY
             Environment.SetEnvironmentVariable("HBS_HOMELIB_DATABASE_TYPE", "IN_MEMORY");
-            //Assert.Fail("AssemblyInitialize failed");
+            
+            Prerequisites();
         }
 
-        public static void AllTestClassesShouldInheritFromSandboxTest()
+        public static void Prerequisites()
         {
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -28,6 +29,18 @@ namespace homelibTests
                 .Where(t => t.GetCustomAttributes(typeof(TestClassAttribute), true).Length > 0)
                 .ToArray();
 
+            // display the test classes and methods of each test class
+            foreach (var testClass in testClasses)
+            {
+                Console.WriteLine($"-Test class: {testClass.Name}");
+                var testMethods = testClass.GetMethods()
+                    .Where(m => m.GetCustomAttributes(typeof(TestMethodAttribute), true).Length > 0)
+                    .ToArray();
+                foreach (var testMethod in testMethods)
+                {
+                    Console.WriteLine($"  -- method: {testMethod.Name}");
+                }
+            }
         }
     }
 }

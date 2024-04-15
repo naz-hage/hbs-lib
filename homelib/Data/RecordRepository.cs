@@ -1,6 +1,7 @@
 ﻿using homelib.Entities;
 using homelib.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -33,5 +34,13 @@ namespace homelib.Data
             await _context.SaveChangesAsync();
         }
 
+        public async Task<Record?> GetRecordByIdAsync(int id)
+        {
+            if (id <= 0)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            return await _context.Records.FirstOrDefaultAsync(r => r.Id == id);
+        }
     }
 }

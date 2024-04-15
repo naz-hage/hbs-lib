@@ -58,5 +58,141 @@ namespace homelibTests.Data
             Assert.AreEqual("The Name", records[0].Name);
             Assert.AreEqual("The Value", records[0].Value);
         }
+
+        [TestMethod]
+        public async Task AddRecordAsync_AddsRecord()
+        {
+            // Arrange
+            Assert.IsNotNull(_options);
+            using (var context = new AppDbContext(_options))
+            {
+                context.Records.Add(new Record { Name = "The Name", Value = "The Value" });
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            using (var context = new AppDbContext(_options))
+            {
+                var repository = new RecordRepository(context);
+                await repository.AddRecordAsync(new Record { Name = "The Name 2", Value = "The Value 2" });
+            }
+
+            // Assert
+            using (var context = new AppDbContext(_options))
+            {
+                var records = await context.Records.ToListAsync();
+                Assert.AreEqual(2, records.Count);
+                Assert.AreEqual("The Name", records[0].Name);
+                Assert.AreEqual("The Value", records[0].Value);
+                Assert.AreEqual("The Name 2", records[1].Name);
+                Assert.AreEqual("The Value 2", records[1].Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task DeleteRecordAsync_DeletesRecord()
+        {
+            // Arrange
+            Assert.IsNotNull(_options);
+            using (var context = new AppDbContext(_options))
+            {
+                context.Records.Add(new Record { Name = "The Name", Value = "The Value" });
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            using (var context = new AppDbContext(_options))
+            {
+                var repository = new RecordRepository(context);
+                var record = await context.Records.FirstAsync();
+                await repository.DeleteRecordAsync(record);
+            }
+
+            // Assert
+            using (var context = new AppDbContext(_options))
+            {
+                var records = await context.Records.ToListAsync();
+                Assert.AreEqual(0, records.Count);
+            }
+        }
+
+        [TestMethod]
+        public async Task UpdateRecordAsync_UpdatesRecord()
+        {
+            // Arrange
+            Assert.IsNotNull(_options);
+            using (var context = new AppDbContext(_options))
+            {
+                context.Records.Add(new Record { Name = "The Name", Value = "The Value" });
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            using (var context = new AppDbContext(_options))
+            {
+                var repository = new RecordRepository(context);
+                var record = await context.Records.FirstAsync();
+                record.Name = "The Name 2";
+                record.Value = "The Value 2";
+                await repository.UpdateRecordAsync(record);
+            }
+
+            // Assert
+            using (var context = new AppDbContext(_options))
+            {
+                var records = await context.Records.ToListAsync();
+                Assert.AreEqual(1, records.Count);
+                Assert.AreEqual("The Name 2", records[0].Name);
+                Assert.AreEqual("The Value 2", records[0].Value);
+            }
+        }
+
+        [TestMethod]
+        public async Task GetRecordByIdAsync_ReturnsRecord()
+        {
+            // Arrange
+            Assert.IsNotNull(_options);
+            using (var context = new AppDbContext(_options))
+            {
+                context.Records.Add(new Record { Name = "The Name-random", Value = "The Value-nonRandon" });
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            Record record;
+            using (var context = new AppDbContext(_options))
+            {
+                var repository = new RecordRepository(context);
+                record = await repository.GetRecordByIdAsync(1);
+            }
+
+            // Assert
+            Assert.IsNotNull(record);
+            Assert.AreEqual("The Name-random", record.Name);
+            Assert.AreEqual("The Value-nonRandon", record.Value);
+        }
+
+        [TestMethod]
+        public async Task GetRecordByIdAsync_ReturnsNull()
+        {
+            // Arrange
+            Assert.IsNotNull(_options);
+            using (var context = new AppDbContext(_options))
+            {
+                context.Records.Add(new Record { Name = "The Name-random", Value = "The Value-nonRandon" });
+                await context.SaveChangesAsync();
+            }
+
+            // Act
+            Record record;
+            using (var context = new AppDbContext(_options))
+            {
+                var repository = new RecordRepository(context);
+                record = await repository.GetRecordByIdAsync(1000);
+            }
+
+            // Assert
+            Assert.IsNull(record);
+        }
     }
 }
