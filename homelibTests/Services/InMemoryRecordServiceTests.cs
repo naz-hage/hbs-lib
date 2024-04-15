@@ -1,13 +1,14 @@
 ﻿using homelib.Data;
 using homelib.Entities;
 using homelib.Services;
+using homelib.Services.Tests;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace homelibTests.Services
 {
     [TestClass]
-    public class RecordServiceTests
+    public class RecordServiceTests : RecordServiceTestsBase
     {
         private RecordService? _recordService;
         private AppDbContext? _context;
@@ -27,6 +28,8 @@ namespace homelibTests.Services
         public async Task GetAllRecordsAsync_ReturnsAllRecords()
         {
             // Arrange
+            Assert.IsNotNull(_recordService);
+            var existRecords = await _recordService.GetAllRecordsAsync();
             var records = new List<Record> { new(), new() };
             Assert.IsNotNull(_context);
             Assert.IsNotNull(_recordService);
@@ -37,7 +40,7 @@ namespace homelibTests.Services
             var result = await _recordService.GetAllRecordsAsync();
 
             // Assert
-            Assert.AreEqual(records.Count, result.Count);
+            Assert.AreEqual(existRecords.Count+2, result.Count);
         }
 
         // Add more tests for AddRecordAsync, DeleteRecordAsync, UpdateRecordAsync...
@@ -45,6 +48,9 @@ namespace homelibTests.Services
         public async Task AddRecordAsync_AddsRecord()
         {
             // Arrange
+            Assert.IsNotNull(_recordService);
+            var records = await _recordService.GetAllRecordsAsync();
+
             var record = new Record { Name = "The Name", Value = "The Value" };
             Assert.IsNotNull(_recordService);
             Assert.IsNotNull(_context);
@@ -62,8 +68,10 @@ namespace homelibTests.Services
         public async Task DeleteRecordAsync_DeletesRecord()
         {
             // Arrange
-            var record = new Record { Name = "The Name", Value = "The Value" };
             Assert.IsNotNull(_recordService);
+            await ArrangeForEmptyDatabase();
+            var record = new Record { Name = "The Name", Value = "The Value" };
+            
             Assert.IsNotNull(_context);
             _context.Records.Add(record);
             await _context.SaveChangesAsync();
@@ -95,5 +103,16 @@ namespace homelibTests.Services
             var result = await _context.Records.FirstOrDefaultAsync(r => r.Name == "The Name");
             Assert.AreEqual("The New Value", result?.Value);
         }
+
+        private async Task ArrangeForEmptyDatabase()
+        {
+            Assert.IsNotNull(_recordService);
+            var records = await _recordService.GetAllRecordsAsync();
+            foreach (var record1 in records)
+            {
+                await _recordService.DeleteRecordAsync(record1);
+            }
+        }
+
     }
 }

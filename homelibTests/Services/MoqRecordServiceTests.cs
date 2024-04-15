@@ -1,19 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using homelib.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using homelib.Data;
-using homelib.Entities;
-using Moq;
+﻿using homelib.Entities;
 using homelib.Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace homelib.Services.Tests
 {
     [TestClass]
-    public class MoqRecordServiceTests
+    public class MoqRecordServiceTests : RecordServiceTestsBase
     {
         private Mock<IRecordRepository>? _mockRecordRepository;
         private RecordService? _recordService;
@@ -47,8 +40,10 @@ namespace homelib.Services.Tests
         public async Task AddRecordAsync_AddsRecord()
         {
             // Arrange
+            await ArrangeForEmptyDatabase();
+
             var record = new Record { Name = "The Name", Value = "The Value" };
-            Assert.IsNotNull(_recordService);
+
             Assert.IsNotNull(_mockRecordRepository);
 
             // Act
@@ -86,6 +81,16 @@ namespace homelib.Services.Tests
 
             // Assert
             _mockRecordRepository.Verify(repo => repo.UpdateRecordAsync(record), Times.Once);
+        }
+
+        private async Task ArrangeForEmptyDatabase()
+        {
+            Assert.IsNotNull(_recordService);
+            var records = await _recordService.GetAllRecordsAsync();
+            foreach (var record1 in records)
+            {
+                await _recordService.DeleteRecordAsync(record1);
+            }
         }
     }
 }

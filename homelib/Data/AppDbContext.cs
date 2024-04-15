@@ -20,13 +20,24 @@ namespace homelib.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (Environment.GetEnvironmentVariable("USE_IN_MEMORY_DATABASE") == "True")
+            var databaseType = Environment.GetEnvironmentVariable("HBS_HOMELIB_DATABASE_TYPE");
+
+            if (databaseType == "IN_MEMORY")
             {
                 optionsBuilder.UseInMemoryDatabase("TestDatabase");
             }
-            else if (!optionsBuilder.IsConfigured)
+            else if (databaseType == "Sqlite")
             {
-                optionsBuilder.UseSqlite(@"Data Source=C:\sqlite\data.db");
+                var databaseLocation = Environment.GetEnvironmentVariable("HBS_HOMELIB_DATABASE_LOCATION");
+                if (string.IsNullOrEmpty(databaseLocation))
+                {
+                    throw new Exception("HBS_HOMELIB_DATABASE_LOCATION environment variable is not set");
+                }
+                optionsBuilder.UseSqlite($"Data Source={databaseLocation}");
+            }
+            else
+            {
+                throw new Exception("HBS_HOMELIB_DATABASE_TYPE environment variable is not set");
             }
         }
     }
