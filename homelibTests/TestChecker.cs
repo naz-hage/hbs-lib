@@ -4,7 +4,7 @@ using System.Reflection;
 namespace homelibTests
 {
     [TestClass]
-    public class TestInheritanceChecker
+    public class TestChecker
     {
         /// <summary>
         /// Initializes the assembly before any tests are run.
