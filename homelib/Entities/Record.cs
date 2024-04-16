@@ -1,4 +1,4 @@
-﻿namespace homelib
+﻿namespace homelib.Entities
 {
     public class Record
     {

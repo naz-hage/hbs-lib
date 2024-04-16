@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace homelibTests
 {
@@ -38,10 +33,11 @@ namespace homelibTests
 
         public T Current => _inner.Current;
 
-        public ValueTask DisposeAsync()
+
+        public async ValueTask DisposeAsync()
         {
-            _inner.Dispose();
-            return ValueTask.CompletedTask;
+            await Task.CompletedTask;
+            GC.SuppressFinalize(this);
         }
 
         public ValueTask<bool> MoveNextAsync()

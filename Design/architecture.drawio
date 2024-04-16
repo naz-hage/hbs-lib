@@ -1,0 +1,80 @@
+<mxfile host="Electron" modified="2024-04-14T14:17:08.898Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="uBPslTHJuXEARSPijFeJ" version="22.1.2" type="device">
+  <diagram name="Page-1" id="cSVa7cewGx9ZVomaMevw">
+    <mxGraphModel dx="780" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-16" value="Database" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="90" y="650" width="80" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-25" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="580" y="70" width="200" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-20" value="http://locathost:3000" style="html=1;strokeWidth=1;shadow=0;dashed=0;shape=mxgraph.ios7ui.url;fillColor=#e0e0e0;strokeColor=#c0c0c0;buttonText=;strokeColor2=#222222;fontColor=#222222;fontSize=8;spacingTop=2;align=center;whiteSpace=wrap;" parent="7qSK5JCa4Hz60jLAFxxl-25" vertex="1">
+          <mxGeometry width="165" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-22" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn4.iconfinder.com/data/icons/online-marketing-hand-drawn-vol-3/52/link__url__network__chain__linked__website__content-128.png" parent="7qSK5JCa4Hz60jLAFxxl-25" vertex="1">
+          <mxGeometry x="165" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-2" value="Library" style="swimlane;" parent="1" vertex="1">
+          <mxGeometry x="33" y="340" width="200" height="200" as="geometry">
+            <mxRectangle x="80" y="80" width="60" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-3" value=".NET Core" style="rounded=0;whiteSpace=wrap;html=1;" parent="UXhM6LXgGzkGRW29i08K-2" vertex="1">
+          <mxGeometry y="24" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-4" value="Windows Client" style="swimlane;strokeWidth=2;perimeterSpacing=0;rounded=0;glass=0;shadow=0;swimlaneLine=1;" parent="1" vertex="1">
+          <mxGeometry x="30" y="63" width="200" height="200" as="geometry">
+            <mxRectangle x="80" y="80" width="60" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-5" value=".NET Core WPF" style="rounded=0;whiteSpace=wrap;html=1;shadow=0;" parent="UXhM6LXgGzkGRW29i08K-4" vertex="1">
+          <mxGeometry y="24" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-14" value="api" style="swimlane;" parent="1" vertex="1">
+          <mxGeometry x="588" y="340" width="200" height="200" as="geometry">
+            <mxRectangle x="80" y="80" width="60" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-17" value=".NET Core" style="rounded=0;whiteSpace=wrap;html=1;" parent="7qSK5JCa4Hz60jLAFxxl-14" vertex="1">
+          <mxGeometry y="24" width="200" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-14" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="7qSK5JCa4Hz60jLAFxxl-16" target="UXhM6LXgGzkGRW29i08K-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="100" y="574" as="sourcePoint" />
+            <mxPoint x="150" y="524" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-15" value="CRUD" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="UXhM6LXgGzkGRW29i08K-14" vertex="1" connectable="0">
+          <mxGeometry x="-0.1071" y="4" relative="1" as="geometry">
+            <mxPoint y="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-21" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="UXhM6LXgGzkGRW29i08K-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="330" as="sourcePoint" />
+            <mxPoint x="170" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-22" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="UXhM6LXgGzkGRW29i08K-2" target="7qSK5JCa4Hz60jLAFxxl-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="490" as="sourcePoint" />
+            <mxPoint x="370" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="UXhM6LXgGzkGRW29i08K-24" value="https:///locathost:8001" style="html=1;strokeWidth=1;shadow=0;dashed=0;shape=mxgraph.ios7ui.url;fillColor=#e0e0e0;strokeColor=#c0c0c0;buttonText=;strokeColor2=#222222;fontColor=#222222;fontSize=8;spacingTop=2;align=center;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="600" y="320" width="165" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-15" value="Web App (Browser)" style="swimlane;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="90" width="200" height="200" as="geometry">
+            <mxRectangle x="580" y="90" width="50" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7qSK5JCa4Hz60jLAFxxl-18" value="React" style="rounded=0;whiteSpace=wrap;html=1;" parent="7qSK5JCa4Hz60jLAFxxl-15" vertex="1">
+          <mxGeometry y="24" width="200" height="36" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
